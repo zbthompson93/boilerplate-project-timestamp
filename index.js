@@ -28,8 +28,7 @@ app.get("/api/hello", function (req, res) {
 app.get("/api", (req, res) =>{
   let today = new Date();
   let todayString = today.toUTCString();
-  let unixTimestamp = Math.floor(today.getTime() / 1000);
-  res.json({"unix": unixTimestamp, "utc": todayString});
+  res.json({"unix": today.getTime(), "utc": todayString});
 })
 
 app.get("/api/:date", (req, res) =>{
@@ -41,7 +40,7 @@ app.get("/api/:date", (req, res) =>{
       // Input is Unix time
       let formattedUnix = parseInt(req.params.date);
       let formattedDate = new Date(formattedUnix).toUTCString();
-      res.json({"unix": req.params.date, "utc": formattedDate})
+      res.json({"unix": formattedUnix, "utc": formattedDate})
     }
   } else{
       // Input is just a date string
